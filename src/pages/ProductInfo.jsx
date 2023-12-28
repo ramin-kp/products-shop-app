@@ -15,12 +15,11 @@ export default function ProductInfo() {
     };
     getProductInfo();
   }, []);
-  console.log(productInfo);
   return (
     <div className="container">
       {Object.keys(productInfo).length ? (
-        <div className="flex items-center justify-between gap-x-10 p-5 my-20 border-2 border-dashed border-rose-600 rounded-lg">
-          <div className="shrink-0 w-[300px] h-[300px]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 p-5 my-20 border-2 border-dashed border-rose-600 rounded-lg">
+          <div className="shrink-0 w-[200px] md:w-[300px] h-[200px] md:h-[300px]">
             <img
               className="w-full h-full"
               src={productInfo.image}
@@ -45,10 +44,12 @@ export default function ProductInfo() {
                 {productInfo.category}
               </span>
             </h2>
-            <h2 className="flex items-center gap-x-2 text-zinc-700 font-medium text-xl text-left">
-              <TbFileDescription className="shrink-0 w-6 h-6 text-rose-600" />
-              description:
-              <span className="ml-2 text-base font-normal">
+            <h2 className="flex flex-col md:flex-row items-center gap-x-2 text-zinc-700 font-medium text-xl text-left">
+              <div className="flex items-center mr-auto">
+                <TbFileDescription className="shrink-0 w-6 h-6 text-rose-600" />
+                description:
+              </div>
+              <span className=" ml-2 text-base font-normal">
                 {productInfo.description}
               </span>
             </h2>

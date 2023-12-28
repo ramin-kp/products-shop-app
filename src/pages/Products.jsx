@@ -2,14 +2,23 @@ import { useProducts } from "../context/ProductContext";
 import Loader from "./../components/Loader";
 import { CiSearch } from "react-icons/ci";
 import Product from "../components/Product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Headers from "../components/Headers";
 import Footer from "../components/Footer";
 export default function Products() {
   const products = useProducts();
   const [text, setText] = useState("");
-
-  console.log(products);
+  const [showProducts, setShowProducts] = useState([]);
+  useEffect(() => {
+    setShowProducts(products);
+  }, [products]);
+  const searchHandler = () => {
+    const data = showProducts.filter((product) =>
+      product.title.toLowerCase().includes(text)
+    );
+    setShowProducts(data);
+    console.log(data);
+  };
   return (
     <div className="container">
       <Headers />
@@ -22,12 +31,13 @@ export default function Products() {
           onChange={(e) => setText(e.target.value.toLowerCase().trim())}
         />
         <button className="p-2 mt-5 bg-rose-600 hover:bg-rose-700 text-white outline-none rounded">
-          <CiSearch className="shrink-0 text-xl" />
+          <CiSearch className="shrink-0 text-xl" onClick={searchHandler} />
         </button>
       </div>
-      {products.length > 1 ? (
+
+      {showProducts.length > 1 ? (
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-16 p-5">
-          {products.map((product) => (
+          {showProducts.map((product) => (
             <Product key={product.id} product={product} />
           ))}
         </div>
