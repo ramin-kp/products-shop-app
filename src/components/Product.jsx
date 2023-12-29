@@ -9,7 +9,7 @@ import { shortenTitle } from "../helpers/helper";
 export default function Product({ product }) {
   const { id, title, image, price } = product;
   return (
-    <div className="p-5 border-2 border-dashed border-rose-600 rounded shadow-lg hover:-translate-y-5 transition-all duration-300 group">
+    <div className="p-5 border-2 border-dashed border-gray-300 rounded-3xl shadow-lg hover:-translate-y-5 transition-all duration-300 group">
       <div className="w-[120px] h-[120px] sm:w-[220px] sm:h-[220px] mx-auto">
         {image ? (
           <img className="w-full h-full" src={image} alt={title} />
