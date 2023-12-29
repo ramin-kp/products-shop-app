@@ -8,7 +8,6 @@ export default function ProductContext({ children }) {
       try {
         setProducts(await api.get("/products"));
       } catch (error) {
-        console.log(error.message);
       }
     };
     getData();
