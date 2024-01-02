@@ -13,14 +13,13 @@ import {
   searchQuery,
 } from "../helpers/helper";
 import { useSearchParams } from "react-router-dom";
-import { useCart } from "../context/CartContext";
 export default function Products() {
   const products = useProducts();
   const [search, setSearch] = useState("");
   const [displayed, setDisplayed] = useState([]);
   const [query, setQuery] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
-  const [state, dispatch] = useCart();
+
   useEffect(() => {
     setDisplayed(products);
     setQuery(searchQuery(searchParams));

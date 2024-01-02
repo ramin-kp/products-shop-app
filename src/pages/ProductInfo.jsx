@@ -7,15 +7,15 @@ import Loader from "../components/Loader";
 import { ProductDetails } from "../context/ProductContext";
 
 export default function ProductInfo() {
-  const [productInfo, setProductInfo] = useState({});
+  const [productInfo, setProductInfo] = useState();
   const { id } = useParams();
   const result = ProductDetails(+id);
   useEffect(() => {
     setProductInfo(result);
-  }, []);
+  }, [result]);
   return (
     <div className="container">
-      {Object.keys(productInfo).length ? (
+      {!!productInfo ? (
         <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 p-5 my-20 border-2 border-dashed border-rose-600 rounded-lg">
           <div className="shrink-0 w-[200px] md:w-[300px] h-[200px] md:h-[300px]">
             <img

@@ -20,7 +20,6 @@ export default function ProductContext({ children }) {
 
 const useProducts = () => {
   const products = useContext(ProductsContext);
-  console.log(products);
   return products;
 };
 const ProductDetails = (id) => {

@@ -1,16 +1,21 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { RotatingLines } from "react-loader-spinner";
-
-import { shortenTitle } from "../helpers/helper";
 import { useCart } from "../context/CartContext";
+import { RotatingLines } from "react-loader-spinner";
+import { shortenTitle, showQuantity } from "../helpers/helper";
+import { TbShoppingBagCheck } from "react-icons/tb";
+import { TbShoppingBagX } from "react-icons/tb";
 
-export default function Product({ product }) {
+const Product = memo(({ product }) => {
   const { id, title, image, price } = product;
+  const [state, dispatch] = useCart();
+  const showProductQuantity = showQuantity(state.selectedItems, id);
+  const clickHandler = (type) => {
+    dispatch({ type, payload: product });
+  };
   return (
-    <div className="p-5 border-2 border-dashed border-gray-300 rounded-3xl shadow-lg hover:-translate-y-5 transition-all duration-300 group">
+    <div className="p-5 border-2 border-dashed border-gray-300 rounded-3xl shadow-lg ">
       <div className="w-[120px] h-[120px] sm:w-[220px] sm:h-[220px] mx-auto">
         {image ? (
           <img className="w-full h-full" src={image} alt={title} />
@@ -36,15 +41,46 @@ export default function Product({ product }) {
           {shortenTitle(title)}
         </h3>
         <p className="text-zinc-700 text-lg">${price}</p>
-        <div className="flex items-center justify-between !mt-5 text-rose-600">
+        <div className="flex items-center justify-between !mt-5">
           <Link to={`/product-info/${id}`}>
-            <TbListDetails className="shrink-0 w-8 h-8 p-0.5 rounded group-hover:border-2 group-hover:border-rose-600 transition-all" />
+            <TbListDetails className="shrink-0 w-7 h-7 p-0.5 bg-rose-600 hover:bg-rose-700 text-white rounded" />
           </Link>
-          <button>
-            <MdOutlineShoppingCart className="shrink-0 w-8 h-8 p-0.5 rounded group-hover:border-2 group-hover:border-rose-600 transition-all" />
-          </button>
+          <div className="flex items-center">
+            {!showProductQuantity && (
+              <button onClick={() => clickHandler("ADD_ITEM")}>
+                <TbShoppingBagCheck className="flex-center shrink-0 w-7 h-7 p-0.5 bg-rose-600 hover:bg-rose-700  text-white rounded" />
+              </button>
+            )}
+            {showProductQuantity > 1 && (
+              <button
+                className="flex justify-center items-end w-7 h-7 bg-rose-600 hover:bg-rose-700 text-white text-2xl rounded"
+                onClick={() => clickHandler("DECREASE")}
+              >
+                -
+              </button>
+            )}
+            {showProductQuantity === 1 && (
+              <button onClick={() => clickHandler("REMOVE_ITEM")}>
+                <TbShoppingBagX className="flex-center shrink-0 w-7 h-7 p-0.5 bg-rose-600 hover:bg-rose-700  text-white rounded" />
+              </button>
+            )}
+            {showProductQuantity && (
+              <span className="inline-block px-2.5 text-xl ">
+                {showProductQuantity}
+              </span>
+            )}
+            {showProductQuantity > 0 && (
+              <button
+                className="flex justify-center items-end w-7 h-7 bg-rose-600 hover:bg-rose-700 text-white text-2xl rounded"
+                onClick={() => clickHandler("INCREASE")}
+              >
+                +
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
-}
+});
+export default Product;
