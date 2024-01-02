@@ -55,7 +55,7 @@ export default function Products() {
           <CiSearch className="shrink-0 text-xl" onClick={searchHandler} />
         </button>
       </div>
-      <div className="flex items-start gap-x-5">
+      <div className="flex flex-col-reverse sm:flex-row sm:items-start gap-5">
         <section className="grow">
           {displayed.length >= 1 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 md:gap-16 p-5">
@@ -76,19 +76,39 @@ export default function Products() {
             className="space-y-2 text-base font-medium child:cursor-pointer"
             onClick={categoryHandler}
           >
-            <li className="p-1 hover:bg-rose-400 hover:text-white transition-all duration-300 rounded">
+            <li
+              className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
+                !query.category ? "bg-rose-400 text-white" : ""
+              }`}
+            >
               All
             </li>
-            <li className="p-1 hover:bg-rose-400 hover:text-white transition-all duration-300 rounded">
+            <li
+              className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
+                query.category === "electronics" ? "bg-rose-400 text-white" : ""
+              }`}
+            >
               Electronics
             </li>
-            <li className="p-1 hover:bg-rose-400 hover:text-white transition-all duration-300 rounded">
+            <li
+              className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
+                query.category === "jewelery" ? "bg-rose-400 text-white" : ""
+              }`}
+            >
               Jewelery
             </li>
-            <li className="p-1 hover:bg-rose-400 hover:text-white transition-all duration-300 rounded">
+            <li
+              className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
+                query.category === "men's clothing" ? "bg-rose-400 text-white" : ""
+              }`}
+            >
               Men's clothing
             </li>
-            <li className="p-1 hover:bg-rose-400 hover:text-white transition-all duration-300 rounded">
+            <li
+              className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
+                query.category === "women's clothing" ? "bg-rose-400 text-white" : ""
+              }`}
+            >
               Women's clothing
             </li>
           </ul>
