@@ -7,8 +7,7 @@ export default function ProductContext({ children }) {
     const getData = async () => {
       try {
         setProducts(await api.get("/products"));
-      } catch (error) {
-      }
+      } catch (error) {}
     };
     getData();
   }, []);
@@ -21,6 +20,13 @@ export default function ProductContext({ children }) {
 
 const useProducts = () => {
   const products = useContext(ProductsContext);
+  console.log(products);
   return products;
 };
-export { useProducts };
+const ProductDetails = (id) => {
+  const products = useContext(ProductsContext);
+  const result = products.find((product) => product.id === id);
+  return result;
+};
+
+export { useProducts, ProductDetails };

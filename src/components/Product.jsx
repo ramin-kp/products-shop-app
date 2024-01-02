@@ -5,6 +5,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { RotatingLines } from "react-loader-spinner";
 
 import { shortenTitle } from "../helpers/helper";
+import { useCart } from "../context/CartContext";
 
 export default function Product({ product }) {
   const { id, title, image, price } = product;

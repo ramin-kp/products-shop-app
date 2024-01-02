@@ -3,17 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import { MdOutlinePriceChange } from "react-icons/md";
 import { TbCategory, TbFileDescription } from "react-icons/tb";
 
-import api from "../services/config";
 import Loader from "../components/Loader";
+import { ProductDetails } from "../context/ProductContext";
 
 export default function ProductInfo() {
   const [productInfo, setProductInfo] = useState({});
   const { id } = useParams();
+  const result = ProductDetails(+id);
   useEffect(() => {
-    const getProductInfo = async () => {
-      setProductInfo(await api.get(`/products/${id}`));
-    };
-    getProductInfo();
+    setProductInfo(result);
   }, []);
   return (
     <div className="container">

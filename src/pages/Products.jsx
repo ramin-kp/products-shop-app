@@ -13,13 +13,14 @@ import {
   searchQuery,
 } from "../helpers/helper";
 import { useSearchParams } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 export default function Products() {
   const products = useProducts();
   const [search, setSearch] = useState("");
   const [displayed, setDisplayed] = useState([]);
   const [query, setQuery] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const [state, dispatch] = useCart();
   useEffect(() => {
     setDisplayed(products);
     setQuery(searchQuery(searchParams));
@@ -29,7 +30,7 @@ export default function Products() {
     let finalProducts = searchProducts(products, query.search);
     finalProducts = filterProducts(finalProducts, query.category);
     setDisplayed(finalProducts);
-    setSearch(query.search || "");
+    setSearch(query.search || ""); // When the site is refreshed, our search will remain
   }, [query]);
   const searchHandler = () => {
     setQuery((query) => createQueryObject(query, { search }));
@@ -37,7 +38,7 @@ export default function Products() {
   const categoryHandler = (e) => {
     const { tagName } = e.target;
     const category = e.target.innerText.toLowerCase();
-    if (tagName !== "LI") return;
+    if (tagName !== "LI") return; //Otherwise, it returns ul
     setQuery((query) => createQueryObject(query, { category }));
   };
   return (
@@ -99,14 +100,18 @@ export default function Products() {
             </li>
             <li
               className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
-                query.category === "men's clothing" ? "bg-rose-400 text-white" : ""
+                query.category === "men's clothing"
+                  ? "bg-rose-400 text-white"
+                  : ""
               }`}
             >
               Men's clothing
             </li>
             <li
               className={`p-1 hover:bg-rose-400 hover:text-white transition-all duration-75 rounded ${
-                query.category === "women's clothing" ? "bg-rose-400 text-white" : ""
+                query.category === "women's clothing"
+                  ? "bg-rose-400 text-white"
+                  : ""
               }`}
             >
               Women's clothing
