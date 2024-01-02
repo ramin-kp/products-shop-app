@@ -7,7 +7,7 @@ export default function App() {
   const router = useRoutes(routes);
   return (
     <CartProvider>
-      <ProductContext>{router}</ProductContext>;
+      <ProductContext>{router}</ProductContext>
     </CartProvider>
   );
 }
