@@ -5,7 +5,6 @@ import CartOrders from "./../components/CartOrders";
 export default function Orders() {
   const [state, dispatch] = useCart();
   const { selectedItems } = state;
-  console.log(state);
   return (
     <div className="container">
       {!selectedItems.length ? (
@@ -16,11 +15,15 @@ export default function Orders() {
           There is no product available!
         </div>
       ) : (
-        <>
+        <div className="my-5">
           {selectedItems.map((product) => (
-            <CartOrders key={product.id} product={product} />
+            <CartOrders
+              key={product.id}
+              product={product}
+              dispatch={dispatch}
+            />
           ))}
-        </>
+        </div>
       )}
     </div>
   );

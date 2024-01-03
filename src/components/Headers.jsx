@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export default function Headers() {
   const [state] = useCart();
-  console.log(state);
   return (
     <div className="flex justify-between w-full h-20 p-5 my-5 bg-rose-600 text-white  rounded-lg">
       <span className="font-bold text-3xl text-center">products shope</span>
