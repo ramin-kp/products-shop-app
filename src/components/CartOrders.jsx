@@ -6,7 +6,6 @@ import { TbShoppingBagX } from "react-icons/tb";
 export default function CartOrders({ product, dispatch }) {
   const { image, title, quantity, price, id } = product;
   const [state] = useCart();
-  console.log(product);
   const showButton = showQuantity(state.selectedItems, id);
   const clickHandler = (type) => {
     dispatch({ type, payload: product });

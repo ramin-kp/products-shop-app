@@ -2,27 +2,38 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { FaCircleXmark } from "react-icons/fa6";
 import CartOrders from "./../components/CartOrders";
+import LayoutOrders from "./../components/LayoutOrders";
+import { Link } from "react-router-dom";
 export default function Orders() {
   const [state, dispatch] = useCart();
   const { selectedItems } = state;
   return (
     <div className="container">
       {!selectedItems.length ? (
-        <div className="flex-center h-screen text-2xl font-medium">
-          <span>
+        <div className="flex flex-col items-center justify-center h-screen text-2xl font-medium">
+          <span className="flex-center">
             <FaCircleXmark className="w-10 h-10 m-2 text-rose-500" />
-          </span>
           There is no product available!
+          </span>
+          <Link
+            className="px-2 py-1 bg-rose-600 hover:bg-rose-700 text-white text-base rounded"
+            to="/"
+          >
+            back to shope
+          </Link>
         </div>
       ) : (
-        <div className="my-5">
-          {selectedItems.map((product) => (
-            <CartOrders
-              key={product.id}
-              product={product}
-              dispatch={dispatch}
-            />
-          ))}
+        <div className="flex items-start justify-between gap-x-16 my-5">
+          <LayoutOrders data={state} />
+          <div className="grow">
+            {selectedItems.map((product) => (
+              <CartOrders
+                key={product.id}
+                product={product}
+                dispatch={dispatch}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
