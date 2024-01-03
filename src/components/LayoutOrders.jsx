@@ -8,7 +8,7 @@ export default function LayoutOrders({ data }) {
   const [state,dispatch]=useCart()
   const { itemsCounter, total } = data;
   return (
-    <div className="shrink-0 my-auto p-5 rounded-lg border-2 border-dashed border-gray-500 space-y-5">
+    <div className="md:shrink-0 my-auto p-5 rounded-lg border-2 border-dashed border-gray-500 space-y-5">
       <div className="flex items-center gap-x-5">
         <span className="flex items-center gap-3 text-rose-600 font-bold  child:w-6 child:h-6">
           <IoPricetagOutline />

@@ -11,7 +11,7 @@ export default function CartOrders({ product, dispatch }) {
     dispatch({ type, payload: product });
   };
   return (
-    <div className="flex items-center justify-between my-5 p-5 border-2 border-dashed border-gray-400 rounded">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-y-5 my-5 p-5 border-2 border-dashed border-gray-400 rounded">
       <div className="flex items-center gap-x-2">
         <img className="w-[100px] h-[100px]" src={image} alt={title} />
         <span className="font-medium w-52 ml-5 line-clamp-2">{title}</span>

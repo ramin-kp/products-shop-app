@@ -10,9 +10,9 @@ export default function Orders() {
   return (
     <div className="container">
       {!selectedItems.length ? (
-        <div className="flex flex-col items-center justify-center h-screen text-2xl font-medium">
+        <div className="flex flex-col items-center justify-center h-screen text-lg md:text-2xl font-medium">
           <span className="flex-center">
-            <FaCircleXmark className="w-10 h-10 m-2 text-rose-500" />
+            <FaCircleXmark className="shrink-0 w-6 md:w-10 h-6 md:h-10 m-2 text-rose-500" />
           There is no product available!
           </span>
           <Link
@@ -23,9 +23,9 @@ export default function Orders() {
           </Link>
         </div>
       ) : (
-        <div className="flex items-start justify-between gap-x-16 my-5">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between gap-x-16 my-5">
           <LayoutOrders data={state} />
-          <div className="grow">
+          <div className="md:grow">
             {selectedItems.map((product) => (
               <CartOrders
                 key={product.id}
